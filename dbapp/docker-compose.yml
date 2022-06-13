@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+    app:
+        build:
+            context: ./docker
+            dockerfile: app.dockerfiles
+        ports: 
+            - 8001:80
+        volumes: 
+            - ./html:/var/www/html
+
+    database: 
+        image: mariadb
+        restart: always
+        environment: 
+            MYSQL_ROOT_PASSWORD: example
+        volumes: 
+            - dbdata:/var/lib/mysql 
+        ports: 
+            - 33061:3306
+volumes: 
+    dbdata: 
